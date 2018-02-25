@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.Cell;
+import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
@@ -14,6 +16,8 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.log4j.Logger;
@@ -162,7 +166,7 @@ public class CensusTests {
 	}
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void getDataTest() throws Exception {
 		
 		logger.info("Get Data Test");
@@ -213,6 +217,54 @@ public class CensusTests {
 			connection.close();
 			if (table != null) {
 				table.close();
+			}
+		}
+		
+	}
+	
+	@Test
+	// @Ignore
+	public void scanTest() throws Exception {
+		
+		logger.info("Scan Test");
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.master", "captain");
+		conf.set("hbase.zookeeper.quorum", "captain,godzilla,darwin");
+		conf.set("hbase.zookeeper.property.clientPort", "2181");
+		Connection connection = ConnectionFactory.createConnection(conf);
+		
+		Table table = null;
+		// Implements Iterable<Result> means we can use forEach Loop
+		ResultScanner scanResult = null;
+		try {
+			table = connection.getTable(TableName.valueOf("census2"));
+			
+			Scan scan = new Scan();
+			scanResult = table.getScanner(scan);
+			for (Result nextResult : scanResult) {
+				
+				logger.info("OUTER LOOP");
+				
+				// Value indexed by 4 Dimensions:
+				// RowKey, ColumnFamily, Column, Timestamp
+				// cloneX acts as extract method
+				for (Cell cell : nextResult.listCells()) {
+					String row = new String(CellUtil.cloneRow(cell));
+					String family = new String(CellUtil.cloneFamily(cell));
+					String column = new String(CellUtil.cloneQualifier(cell));
+					String value = new String(CellUtil.cloneValue(cell));
+					logger.info(row + " " + family + " " + column + " "  + value);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("ERROR", e);
+		} finally {
+			connection.close();
+			if (table != null) {
+				table.close();
+			}
+			if (scanResult != null) {
+				scanResult.close();
 			}
 		}
 		
