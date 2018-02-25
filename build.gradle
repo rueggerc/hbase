@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+	compile 'log4j:log4j:1.2.17'
+        compile 'org.apache.hbase:hbase-client:1.2.6'
+	testCompile 'junit:junit:4.12'
+     
+}
+
+
+test {
+  testLogging {
+    events "PASSED", "STARTED", "FAILED", "SKIPPED"
+  }
+}
+  
