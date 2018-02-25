@@ -11,7 +11,9 @@ import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
+import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.log4j.Logger;
@@ -102,7 +104,7 @@ public class CensusTests {
 	}
 	
 	@Test
-	// @Ignore
+	@Ignore
 	public void putDataTest() throws Exception {
 		
 		logger.info("Insert Data Test");
@@ -147,6 +149,63 @@ public class CensusTests {
 			
 			logger.info("Data Inserted");
 
+		
+		} catch (Exception e) {
+			logger.error("ERROR", e);
+		} finally {
+			connection.close();
+			if (table != null) {
+				table.close();
+			}
+		}
+		
+	}
+
+	@Test
+	// @Ignore
+	public void getDataTest() throws Exception {
+		
+		logger.info("Get Data Test");
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.master", "captain");
+		conf.set("hbase.zookeeper.quorum", "captain,godzilla,darwin");
+		conf.set("hbase.zookeeper.property.clientPort", "2181");
+		Connection connection = ConnectionFactory.createConnection(conf);
+		
+		Table table = null;
+		try {
+			table = connection.getTable(TableName.valueOf("census2"));
+
+			// Get One Row
+			Get get = new Get(Bytes.toBytes("1"));
+			get.addColumn(PERSONAL_CF, NAME_COLUMN);
+			get.addColumn(PROFESSIONAL_CF, FIELD_COLUMN);
+			
+			Result result = table.get(get);
+			byte[] nameValue = result.getValue(PERSONAL_CF, NAME_COLUMN);
+			byte[] fieldValue = result.getValue(PROFESSIONAL_CF, FIELD_COLUMN);
+			
+			logger.info("Name= " + Bytes.toString(nameValue));
+			logger.info("Field= " + Bytes.toString(fieldValue));
+			
+			// Get Multiple Rows
+			List<Get> getList = new ArrayList<Get>();
+			Get get2 = new Get(Bytes.toBytes("2"));
+			get2.addColumn(PERSONAL_CF, NAME_COLUMN);
+			
+			Get get3 = new Get(Bytes.toBytes("3"));
+			get3.addColumn(PERSONAL_CF, NAME_COLUMN);
+			
+			// Do Get 
+			getList.add(get2);
+			getList.add(get3);
+			Result[] results = table.get(getList);
+			
+			for (Result nextResult : results) {
+				nameValue = nextResult.getValue(PERSONAL_CF, NAME_COLUMN);
+				logger.info("Name=" + Bytes.toString(nameValue));
+			}
+			
 		
 		} catch (Exception e) {
 			logger.error("ERROR", e);
