@@ -29,9 +29,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class CensusTests {
+public class FilterTests {
 
-	private static Logger logger = Logger.getLogger(CensusTests.class);
+	private static Logger logger = Logger.getLogger(FilterTests.class);
 	
 	private static final String HBASE_CONFIG_ZOOKEEPER_QUORUM = "captain,godzilla,darwin";
 	private static final String HBASE_CONFIG_ZOOKEEPER_CLIENTPORT = "2181";
@@ -72,9 +72,32 @@ public class CensusTests {
 		logger.info("Dummy Test");
 	}
 	
+	//	create 'census3', 'personal', 'professional'
+	//	put 'census3', 1, 'personal:name', 'Mike Jones'
+	//	put 'census3', 1, 'personal:marital_status', 'unmarried'
+	//	put 'census3', 1, 'personal:gender', 'male'
+	//	put 'census3', 1, 'professional:employed', 'yes'
+	//	put 'census3', 1, 'professional:education_level', 'high school'
+	//	put 'census3', 1, 'professional:field', 'construction'
+	//
+	//	put 'census3', 3, 'personal:name', 'Jill Tang'
+	//	put 'census3', 3, 'personal:marital_status', 'married'
+	//	put 'census3', 3, 'personal:spouse', 'Jim Tang'
+	//	put 'census3', 3, 'professional:education_level', 'post-grad'
+	//	put 'census3', 3, 'personal:gender', 'female'
+	//
+	//	put 'census3', 2, 'personal:name', 'Ben'
+	//	put 'census3', 2, 'personal:marital_status', 'divorced'
+	//	put 'census3', 2, 'personal:gender', 'male'
+	//
+	//	put 'census3', 4, 'personal:name', 'Maria'
+	//	put 'census3', 4, 'personal:marital_status', 'divorced'
+	//	put 'census3', 4, 'personal:gender', 'female'	
+	
+	
 	@Test
 	@Ignore
-	public void testCreateTable() throws Exception {
+	public void testFilterOnRowKeys() throws Exception {
 		
 		logger.info("Create Table Test");
 		Configuration conf = HBaseConfiguration.create();
