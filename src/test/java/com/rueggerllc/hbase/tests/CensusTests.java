@@ -224,7 +224,7 @@ public class CensusTests {
 	}
 	
 	@Test
-	@Ignore
+	// @Ignore
 	public void testScanTable() throws Exception {
 		
 		logger.info("Scan Table Test");
@@ -307,7 +307,7 @@ public class CensusTests {
 	}
 	
 	@Test
-	// @Ignore
+	@Ignore
 	public void testDisableAndDrop() throws Exception {
 		
 		logger.info("Test Delete Cell Data");
