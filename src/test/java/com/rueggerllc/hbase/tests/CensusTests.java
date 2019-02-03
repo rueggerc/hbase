@@ -224,10 +224,58 @@ public class CensusTests {
 	}
 	
 	@Test
-	@Ignore
+	// @Ignore
 	public void testScanTable() throws Exception {
 		
 		logger.info("Scan Table Test");
+		Configuration conf = HBaseConfiguration.create();
+		conf.set("hbase.master", "captain");
+		conf.set("hbase.zookeeper.quorum", "captain,godzilla,darwin");
+		conf.set("hbase.zookeeper.property.clientPort", "2181");
+		Connection connection = ConnectionFactory.createConnection(conf);
+		
+		Table table = null;
+		// Implements Iterable<Result> means we can use forEach Loop
+		ResultScanner scanResult = null;
+		try {
+			table = connection.getTable(TableName.valueOf("census2"));
+			
+			Scan scan = new Scan();
+			scanResult = table.getScanner(scan);
+			for (Result nextResult : scanResult) {
+				
+				logger.info("OUTER LOOP");
+				
+				// Value indexed by 4 Dimensions:
+				// RowKey, ColumnFamily, Column, Timestamp
+				// cloneX acts as extract method
+				for (Cell cell : nextResult.listCells()) {
+					String row = new String(CellUtil.cloneRow(cell));
+					String family = new String(CellUtil.cloneFamily(cell));
+					String column = new String(CellUtil.cloneQualifier(cell));
+					String value = new String(CellUtil.cloneValue(cell));
+					logger.info(row + " " + family + " " + column + " "  + value);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("ERROR", e);
+		} finally {
+			connection.close();
+			if (table != null) {
+				table.close();
+			}
+			if (scanResult != null) {
+				scanResult.close();
+			}
+		}
+		
+	}
+	
+	@Test
+	// @Ignore
+	public void testScanWithFilter() throws Exception {
+		
+		logger.info("TEST: ScanWithFilter");
 		Configuration conf = HBaseConfiguration.create();
 		conf.set("hbase.master", "captain");
 		conf.set("hbase.zookeeper.quorum", "captain,godzilla,darwin");
@@ -307,7 +355,7 @@ public class CensusTests {
 	}
 	
 	@Test
-	// @Ignore
+	@Ignore
 	public void testDisableAndDrop() throws Exception {
 		
 		logger.info("Test Delete Cell Data");

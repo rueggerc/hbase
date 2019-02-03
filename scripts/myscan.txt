@@ -1,0 +1,14 @@
+# select * from sensors
+scan 'sensors'
+
+# select temperature from sensors
+scan 'sensors', {COLUMNS=>['dht22:temperature']}
+
+# select * from sensors limit 1
+scan 'sensors', {LIMIT=>1}
+
+# select * from sensors where rowkey = 1
+get 'sensors', 1
+
+
+exit

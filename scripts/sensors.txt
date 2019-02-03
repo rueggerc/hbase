@@ -1,0 +1,24 @@
+create 'sensors', 'dht22', 'sensehat'
+put 'sensors', 1, 'dht22:sensor_id', 'sensor1'
+put 'sensors', 1, 'dht22:temperature', 72.33
+put 'sensors', 1, 'dht22:humidity', 18.2
+put 'sensors', 1, 'dht22:location', 'indoor'
+put 'sensors', 1, 'dht22:timestamp', 1549193065979
+
+put 'sensors', 2, 'dht22:sensor_id', 'sensor2'
+put 'sensors', 2, 'dht22:temperature', 74.11
+put 'sensors', 2, 'dht22:humidity', 22,44
+put 'sensors', 2, 'dht22:location', 'indoor'
+put 'sensors', 2, 'dht22:timestamp', 1549193167523
+
+put 'sensors', 3, 'dht22:sensor_id', 'sensor3'
+put 'sensors', 3, 'dht22:temperature', 68.33
+put 'sensors', 3, 'dht22:humidity', 23.44
+put 'sensors', 3, 'dht22:location', 'indoor'
+put 'sensors', 3, 'dht22:timestamp', 1549200374673
+
+put 'sensors', 4, 'dht22:sensor_id', 'sensor1'
+put 'sensors', 4, 'dht22:temperature', 66.33
+put 'sensors', 4, 'dht22:humidity', 21.96
+put 'sensors', 4, 'dht22:location', 'indoor'
+put 'sensors', 4, 'dht22:timestamp', 1549200374673
