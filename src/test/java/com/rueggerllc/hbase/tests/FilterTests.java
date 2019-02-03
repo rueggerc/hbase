@@ -285,8 +285,8 @@ public class FilterTests {
 
 	
 	private static void printResults(ResultScanner scanResults) {
-		for (Result results : scanResults) {
-			for (Cell cell : results.listCells()) {
+		for (Result result : scanResults) {
+			for (Cell cell : result.listCells()) {
 				String row = new String(CellUtil.cloneRow(cell));
 				String family = new String(CellUtil.cloneFamily(cell));
 				String column = new String(CellUtil.cloneQualifier(cell));

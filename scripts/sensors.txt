@@ -5,20 +5,51 @@ put 'sensors', 1, 'dht22:humidity', 18.2
 put 'sensors', 1, 'dht22:location', 'indoor'
 put 'sensors', 1, 'dht22:timestamp', 1549193065979
 
-put 'sensors', 2, 'dht22:sensor_id', 'sensor2'
-put 'sensors', 2, 'dht22:temperature', 74.11
-put 'sensors', 2, 'dht22:humidity', 22,44
-put 'sensors', 2, 'dht22:location', 'indoor'
-put 'sensors', 2, 'dht22:timestamp', 1549193167523
+put 'sensors', 2, 'dht22:sensor_id', 'sensor1'
+put 'sensors', 2, 'dht22:temperature', 70.87
+put 'sensors', 2, 'dht22:humidity', 23.1
+put 'sensors', 2, 'dht22:location', 'outdoor'
+put 'sensors', 2, 'dht22:timestamp', 1549193065979
 
-put 'sensors', 3, 'dht22:sensor_id', 'sensor3'
-put 'sensors', 3, 'dht22:temperature', 68.33
-put 'sensors', 3, 'dht22:humidity', 23.44
+put 'sensors', 3, 'dht22:sensor_id', 'sensor1'
+put 'sensors', 3, 'dht22:temperature', 66.33
+put 'sensors', 3, 'dht22:humidity', 21.96
 put 'sensors', 3, 'dht22:location', 'indoor'
 put 'sensors', 3, 'dht22:timestamp', 1549200374673
 
-put 'sensors', 4, 'dht22:sensor_id', 'sensor1'
-put 'sensors', 4, 'dht22:temperature', 66.33
-put 'sensors', 4, 'dht22:humidity', 21.96
+put 'sensors', 4, 'dht22:sensor_id', 'sensor2'
+put 'sensors', 4, 'dht22:temperature', 44.66
+put 'sensors', 4, 'dht22:humidity', 22.44
 put 'sensors', 4, 'dht22:location', 'indoor'
-put 'sensors', 4, 'dht22:timestamp', 1549200374673
+put 'sensors', 4, 'dht22:timestamp', 1549193167523
+
+put 'sensors', 5, 'dht22:sensor_id', 'sensor2'
+put 'sensors', 5, 'dht22:temperature', 42.03
+put 'sensors', 5, 'dht22:humidity', 22.44
+put 'sensors', 5, 'dht22:location', 'indoor'
+put 'sensors', 5, 'dht22:timestamp', 1549193167523
+
+put 'sensors', 6, 'dht22:sensor_id', 'sensor2'
+put 'sensors', 6, 'dht22:temperature', 46.33
+put 'sensors', 6, 'dht22:humidity', 30.27
+put 'sensors', 6, 'dht22:location', 'indoor'
+put 'sensors', 6, 'dht22:timestamp', 1549193167523
+
+put 'sensors', 7, 'dht22:sensor_id', 'sensor3'
+put 'sensors', 7, 'dht22:temperature', 20.00
+put 'sensors', 7, 'dht22:humidity', 23.44
+put 'sensors', 7, 'dht22:location', 'indoor'
+put 'sensors', 7, 'dht22:timestamp', 1549200374673
+
+put 'sensors', 8, 'dht22:sensor_id', 'sensor3'
+put 'sensors', 8, 'dht22:temperature', 40.00
+put 'sensors', 8, 'dht22:humidity', 24.01
+put 'sensors', 8, 'dht22:location', 'indoor'
+put 'sensors', 8, 'dht22:timestamp', 1549200374673
+
+put 'sensors', 9, 'dht22:sensor_id', 'sensor3'
+put 'sensors', 9, 'dht22:temperature', 60.00
+put 'sensors', 9, 'dht22:humidity', 25.66
+put 'sensors', 9, 'dht22:location', 'indoor'
+put 'sensors', 9, 'dht22:timestamp', 1549200374673
+
