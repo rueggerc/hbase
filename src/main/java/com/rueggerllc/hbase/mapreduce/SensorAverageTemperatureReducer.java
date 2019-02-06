@@ -7,7 +7,6 @@ import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapreduce.TableReducer;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.io.DoubleWritable;
-import org.apache.hadoop.io.FloatWritable;
 
 /*
  *  Notes:
@@ -22,7 +21,7 @@ import org.apache.hadoop.io.FloatWritable;
  *  Mutation is an operation performed on an HBase table
  */
 
-public class SensorAverageTemperatureReducer extends TableReducer<ImmutableBytesWritable, FloatWritable, ImmutableBytesWritable>  {
+public class SensorAverageTemperatureReducer extends TableReducer<ImmutableBytesWritable, DoubleWritable, ImmutableBytesWritable>  {
 
 	// Key,Value
 	private static final byte[] COLUMN_FAMILY = "dht22".getBytes();
