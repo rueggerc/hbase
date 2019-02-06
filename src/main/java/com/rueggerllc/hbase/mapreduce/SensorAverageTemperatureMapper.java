@@ -44,9 +44,10 @@ public class SensorAverageTemperatureMapper extends TableMapper<ImmutableBytesWr
 		
 		// Set the value of our output mapping to the temperature
 		byte[] temperatureBytes = record.getValue(COLUMN_FAMILY, TEMPERATURE);
-		String foo = new String(temperatureBytes);
-		System.out.println("==== FOO=" + foo);
-		float temperature = ByteBuffer.wrap(temperatureBytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+		String temperatureString = new String(temperatureBytes);
+		Double temperature = Double.valueOf(temperatureString);
+		System.out.println("==== TEMP=" + temperature);
+		// float temperature = ByteBuffer.wrap(temperatureBytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 		System.out.println("GOT TEMP=" + temperature);
 		DoubleWritable temperatureValue = new DoubleWritable(temperature);
 		context.write(key, temperatureValue);
