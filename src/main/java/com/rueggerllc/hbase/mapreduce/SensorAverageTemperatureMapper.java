@@ -7,6 +7,7 @@ import java.nio.ByteOrder;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapreduce.TableMapper;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
 
@@ -24,7 +25,7 @@ import org.apache.hadoop.io.IntWritable;
  *   
  */
 
-public class SensorAverageTemperatureMapper extends TableMapper<ImmutableBytesWritable, FloatWritable>  {
+public class SensorAverageTemperatureMapper extends TableMapper<ImmutableBytesWritable, DoubleWritable>  {
 
 	private static final byte[] COLUMN_FAMILY = "dht22".getBytes();
 	private static final byte[] SENSOR_ID = "sensor_id".getBytes();
@@ -44,9 +45,9 @@ public class SensorAverageTemperatureMapper extends TableMapper<ImmutableBytesWr
 		
 		// Set the value of our output mapping to the temperature
 		byte[] temperatureBytes = record.getValue(COLUMN_FAMILY, TEMPERATURE);
-		float temperature = ByteBuffer.wrap(temperatureBytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+		double temperature = ByteBuffer.wrap(temperatureBytes).order(ByteOrder.LITTLE_ENDIAN).getDouble();
 		System.out.println("GOT TEMP=" + temperature);
-		FloatWritable temperatureValue = new FloatWritable(temperature);
+		DoubleWritable temperatureValue = new DoubleWritable(temperature);
 		context.write(key, temperatureValue);
 	}
 	
