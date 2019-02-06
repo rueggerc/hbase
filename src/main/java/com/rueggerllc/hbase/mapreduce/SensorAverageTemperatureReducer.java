@@ -25,7 +25,7 @@ import org.apache.hadoop.io.IntWritable;
 public class SensorAverageTemperatureReducer extends TableReducer<ImmutableBytesWritable, FloatWritable, ImmutableBytesWritable>  {
 
 	// Key,Value
-	private static final byte[] COLUMN_FAMILY = "sensor_id".getBytes();
+	private static final byte[] COLUMN_FAMILY = "dht22".getBytes();
 	private static final byte[] AVERAGE_TEMP = "avg_temperature".getBytes();
 	
 	public void reduce(ImmutableBytesWritable mappedKey, Iterable<FloatWritable> mappedValuesForKey, Context context) throws IOException, InterruptedException {

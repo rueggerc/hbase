@@ -24,7 +24,7 @@ public class SensorAverageTemperatureApp {
 		
 		// Tables
 		String sourceTable = "sensors";
-		String targetTable = "sensors_average_temperature";
+		String targetTable = "sensor_summary";
 		
 		// Setup Scan
 		// default caching of HBase table rows=1. Inefficient for MapReduce

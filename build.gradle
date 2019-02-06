@@ -8,10 +8,10 @@ repositories {
 
 dependencies {
 	compile 'log4j:log4j:1.2.17'
-        compile 'org.apache.hbase:hbase:1.2.6'
-        compile 'org.apache.hbase:hbase-client:1.2.6'
-        compile 'org.apache.hbase:hbase-server:1.2.6'
-        compile 'org.apache.hadoop:hadoop-common:2.7.4'
+    compile 'org.apache.hbase:hbase:1.2.6'
+    compile 'org.apache.hbase:hbase-client:1.2.6'
+    compile 'org.apache.hbase:hbase-server:1.2.6'
+    compile 'org.apache.hadoop:hadoop-common:2.7.4'
 	testCompile 'junit:junit:4.12'
      
 }
