@@ -29,10 +29,15 @@ public class SensorAverageTemperatureReducer extends TableReducer<ImmutableBytes
 	
 	public void reduce(ImmutableBytesWritable mappedKey, Iterable<DoubleWritable> mappedValuesForKey, Context context) throws IOException, InterruptedException {
 		
+		System.out.println("========== REDUCE BEGIN ===");
+		System.out.println("KEY=" + new String(mappedKey.get());
+		
 		Double sum = 0.0;
 		int count = 0;
 		for (DoubleWritable nextValue : mappedValuesForKey) {
+			System.out.println("NEXT VALUE=" + nextValue.get());
 			sum += nextValue.get();
+			count++;
 		}
 		Double average = 0.0;
 		if (count > 0) {
