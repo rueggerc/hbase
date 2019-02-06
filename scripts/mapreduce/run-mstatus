@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Create Summary Table in hbase shell:
+
+
+# disable 'summary'
+# drop 'summary'
+# create 'summary', 'marital_status'
+
+JAR_FILE=/home/hadoop/code/hbase/build/libs/hbase.jar
+export HADOOP_CLASSPATH=`$HBASE_HOME/bin/hbase mapredcp`:$HBASE_HOME/conf 
+
+# Submit Application
+hadoop jar $JAR_FILE com.rueggerllc.hbase.apps.MaritalStatusApp 
+
+
