@@ -6,8 +6,8 @@ import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapreduce.TableReducer;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.FloatWritable;
-import org.apache.hadoop.io.IntWritable;
 
 /*
  *  Notes:
@@ -28,14 +28,14 @@ public class SensorAverageTemperatureReducer extends TableReducer<ImmutableBytes
 	private static final byte[] COLUMN_FAMILY = "dht22".getBytes();
 	private static final byte[] AVERAGE_TEMP = "avg_temperature".getBytes();
 	
-	public void reduce(ImmutableBytesWritable mappedKey, Iterable<FloatWritable> mappedValuesForKey, Context context) throws IOException, InterruptedException {
+	public void reduce(ImmutableBytesWritable mappedKey, Iterable<DoubleWritable> mappedValuesForKey, Context context) throws IOException, InterruptedException {
 		
-		Float sum = 0f;
+		Double sum = 0.0;
 		int count = 0;
-		for (FloatWritable nextValue : mappedValuesForKey) {
+		for (DoubleWritable nextValue : mappedValuesForKey) {
 			sum += nextValue.get();
 		}
-		Float average = 0f;
+		Double average = 0.0;
 		if (count > 0) {
 			average = sum / count;
 		}
