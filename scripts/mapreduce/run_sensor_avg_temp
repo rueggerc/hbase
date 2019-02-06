@@ -5,6 +5,12 @@
 #drop 'sensor_summary'
 #create 'sensor_summary', 'dht22'
 
+# To check results
+hbase shell
+scan 'sensor_summary'
+quit
+
+
 JAR_FILE=/home/hadoop/code/hbase/build/libs/hbase.jar
 export HADOOP_CLASSPATH=`$HBASE_HOME/bin/hbase mapredcp`:$HBASE_HOME/conf 
 
